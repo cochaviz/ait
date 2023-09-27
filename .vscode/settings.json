@@ -3,5 +3,8 @@
   "PandocCiter.DefaultBibs": ["workflow/bibliography.bib"],
 
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "python.analysis.typeCheckingMode": "basic"
+  "python.analysis.typeCheckingMode": "basic",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  }
 }

@@ -153,6 +153,7 @@ def subprocess_run_info(command: list[str], *args) -> subprocess.CompletedProces
 def options_source_markdown(source, source_files, target) -> list[str]:
     options = [
         "--from=markdown+mark",
+        # "--filter=mermaid-filter",
         "--filter=pandoc-crossref",
         "--citeproc",
         "--metadata=codeBlockCaptions",
@@ -177,7 +178,7 @@ def build(
     docker: bool = False,
     pandoc: str = "pandoc",
     tectonic: bool = False,
-    open_file: bool = True,
+    open_file: bool = False,
     **_, # throw away all other added arguments
 ):  
     pandoc: list[str] = [pandoc]
@@ -232,7 +233,7 @@ def build(
 
     # if docker is used, set tectonic option by default
     if (tectonic or docker) and "pdf" in target:
-        options.append("--pdf-engine=tectonic")
+        options += ["--pdf-engine=tectonic", "--pdf-engine-opt=-Z", "--pdf-engine-opt=continue-on-errors"]
 
     out_filename = None
     returncode = 0
@@ -248,8 +249,11 @@ def build(
             returncode += process.returncode
 
     if returncode != 0:
-        logging.critical(f"pandoc: Exited unexpectedly.")
-        exit(returncode)
+        logging.error(f"pandoc: Something might have gone wrong, please check pdf output (code {process.returncode})")
+
+    if out_filename is None or not os.path.exists(out_filename):
+        logging.critical("Unable to create PDF file..")
+        exit(1)
 
     if open_file:
         _open_file(out_filename)
@@ -328,9 +332,9 @@ if __name__ == "__main__":
                              requirement are met.""",
     )
     build_command.add_argument(
-        "--do-not-open",
-        action="store_false",
-        help="""Do not open output in default code.""",
+        "--open_file",
+        action="store_true",
+        help="""Open created file with default reader when successfully created.""",
     )
     build_command.add_argument(
         "--tectonic",

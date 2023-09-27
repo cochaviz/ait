@@ -1,6 +1,0 @@
-# References
-
-::: {#refs}
-:::
-
-`\printbibliography`{#latex}
