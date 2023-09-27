@@ -178,7 +178,11 @@ def build(
     docker: bool = False,
     pandoc: str = "pandoc",
     tectonic: bool = False,
+<<<<<<< HEAD
     open_file: bool = False,
+=======
+    open_rendered: bool = False,
+>>>>>>> 409d3e0929e667fc712464eb99957c02c8b6bae7
     **_, # throw away all other added arguments
 ):  
     pandoc: list[str] = [pandoc]
@@ -207,6 +211,9 @@ def build(
     else:
         source_files = [source]
         source = os.path.dirname(source)
+
+    # files should be rendered together in order
+    source_files.sort()
 
     # all resources should be located in the source folder
     options.append(f"--resource-path={source}")
@@ -255,7 +262,7 @@ def build(
         logging.critical("Unable to create PDF file..")
         exit(1)
 
-    if open_file:
+    if open_rendered:
         _open_file(out_filename)
 
 
@@ -325,8 +332,9 @@ if __name__ == "__main__":
                              be installed.""",
     )
     build_command.add_argument(
-        "--check-health",
+        "--open-rendered",
         action="store_true",
+<<<<<<< HEAD
         help="""Check if dependencies are installed. If docker
                              flag is set, it will only check whether docker
                              requirement are met.""",
@@ -335,6 +343,9 @@ if __name__ == "__main__":
         "--open_file",
         action="store_true",
         help="""Open created file with default reader when successfully created.""",
+=======
+        help="""Open rendered file(s) in default file viewer.""",
+>>>>>>> 409d3e0929e667fc712464eb99957c02c8b6bae7
     )
     build_command.add_argument(
         "--tectonic",
