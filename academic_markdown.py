@@ -178,11 +178,7 @@ def build(
     docker: bool = False,
     pandoc: str = "pandoc",
     tectonic: bool = False,
-<<<<<<< HEAD
-    open_file: bool = False,
-=======
     open_rendered: bool = False,
->>>>>>> 409d3e0929e667fc712464eb99957c02c8b6bae7
     **_, # throw away all other added arguments
 ):  
     pandoc: list[str] = [pandoc]
@@ -334,18 +330,7 @@ if __name__ == "__main__":
     build_command.add_argument(
         "--open-rendered",
         action="store_true",
-<<<<<<< HEAD
-        help="""Check if dependencies are installed. If docker
-                             flag is set, it will only check whether docker
-                             requirement are met.""",
-    )
-    build_command.add_argument(
-        "--open_file",
-        action="store_true",
-        help="""Open created file with default reader when successfully created.""",
-=======
         help="""Open rendered file(s) in default file viewer.""",
->>>>>>> 409d3e0929e667fc712464eb99957c02c8b6bae7
     )
     build_command.add_argument(
         "--tectonic",
