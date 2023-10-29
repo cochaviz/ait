@@ -44,7 +44,8 @@ $Catch$ are **conditionally independent** given $Cavity$. Conditional
 independence is formalized by the following relation.
 
 $$
-P(Catch \land Toothache | Cavity) = P(Catch | Cavity) \land P(Toothache | Cavity)
+P(Catch \land Toothache | Cavity) = P(Catch | Cavity) \land P(Toothache |
+Cavity)
 $$
 
 A formal specification of a Bayesian Network (BN) can be characterized as

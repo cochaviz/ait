@@ -132,7 +132,9 @@ $${#eq:smoothing_backward}
 
 - Since the most-likely sequence is formed by the joint probability of all the
   hidden states, we cannot just apply smoothing and calculate the most likely
-  hidden state based on that states prior.
+  hidden state based on that states' prior. ==I sort of get the idea why you
+  can't just keep 'smoothing' over and over again and then use those states, but
+  I can't quite put my finger on it.==
 
 $$
 \begin{gathered}
