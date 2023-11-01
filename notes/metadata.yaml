@@ -4,3 +4,6 @@ author: Zohar Cochavi
 
 documentclass: book
 geometry: margin=1in
+
+header-includes: |
+  \setkeys{Gin}{width=0.7\textwidth}
